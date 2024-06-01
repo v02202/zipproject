@@ -1,0 +1,6 @@
+.env
+.DS_Store
+.coverage
+*.dump
+*.log
+__pycache__
