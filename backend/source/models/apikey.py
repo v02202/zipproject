@@ -8,7 +8,6 @@ from .allmodels import (
 )
 from ..modules import token
 import secrets
-auth = auth.BasicAuth()
 config = Config(".env")
 tz_offset = config("TIMEZONE", cast=int, default=8)
 

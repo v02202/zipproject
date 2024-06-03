@@ -25,7 +25,10 @@ class BasicAuth(BaseBasicAuth):
         if data == None:
             return None
         else: 
-            utf8_data = data.encode('utf-8')
+            if type(data) == bytes:
+                utf8_data = data
+            else:
+                utf8_data = data.encode('utf-8')
             # print('length of utf8_data', len(utf8_data))
             pad_data = pad(utf8_data, AES.block_size)
             pad_key = pad(self.aes_key, AES.block_size)

@@ -3,7 +3,9 @@ annotated-types==0.7.0
 anyio==4.4.0
 async-timeout==4.0.3
 asyncpg==0.29.0
+boto3==1.34.117
 certifi==2024.2.2
+cryptography==42.0.7
 charset-normalizer==3.3.2
 click==8.1.7
 databases==0.9.0
@@ -28,5 +30,4 @@ starlette==0.37.2
 starlette-auth-toolkit==0.5.0
 starlette_jwt==0.1.9
 typing_extensions==4.12.0
-urllib3==2.2.1
 uvicorn==0.30.0

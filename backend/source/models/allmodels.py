@@ -38,6 +38,7 @@ upload = sqlalchemy.Table(
     sqlalchemy.Column("upload_id", sqlalchemy.Integer, autoincrement=True, primary_key=True, comment='上傳流水號'),
     sqlalchemy.Column("upload_sid", sqlalchemy.VARCHAR(10), nullable=True, comment='上傳唯一碼'),
     sqlalchemy.Column("filename", sqlalchemy.Text, nullable=True, comment='上傳檔名稱'),
+    sqlalchemy.Column("storage_path", sqlalchemy.Text, nullable=True, comment='存放位置'),
     sqlalchemy.Column("upload_by", 
         sqlalchemy.Integer, 
         sqlalchemy.ForeignKey('users.users_id', ondelete='CASCADE'), 

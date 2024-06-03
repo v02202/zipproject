@@ -1,9 +1,7 @@
 from starlette.config import Config
 from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import scoped_session
-from sqlalchemy.orm import sessionmaker
-import databases
 from sqlalchemy.pool import NullPool
+import databases
 config = Config(".env")
 
 DB_HOST = config("DB_HOST", default="")
@@ -18,9 +16,7 @@ print("DB_URL: ", DB_URL)
 CONNECTION = databases.Database(DB_URL)
 # Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # engine = create_engine(
-#     DB_URL, 
-#     convert_unicode=True, 
-#     poolclass=NullPool
+#     DB_URL
 # )
 # META_DATA = MetaData()
 # META_DATA.reflect(bind=engine)
