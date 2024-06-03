@@ -36,11 +36,11 @@ async def createUser(args):
     ).returning(users.c.users_id)
     
     try:
-        user_oid = await database.CONNECTION.execute(query)
+        user_id = await database.CONNECTION.execute(query)
     except:
         return False
     encode = dict()
-    encode["user_oid"] = user_oid
+    encode["user_id"] = user_id
     encode["expires"] = constance.EXPIRES
     acs_token, rfs_token = token.generateToken(**encode)
     res = {
