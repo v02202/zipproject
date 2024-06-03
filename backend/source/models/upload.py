@@ -1,4 +1,5 @@
 from tempfile import NamedTemporaryFile
+from datetime import datetime, timedelta
 import zipfile, os, base64
 from ..modules import aws, token
 from ..auth import auth
@@ -36,7 +37,7 @@ def decodeZip(encoded_path, decoded_path):
 async def uploadZip(upload_file, users_id):
     file_size = upload_file.size
     # Check file size
-    if upload_file.size > 50000000:
+    if upload_file.size > constance.FILE_LIMIT:
         query = upload.insert().values(
             filename = upload_file.filename,
             upload_by = users_id,
@@ -116,6 +117,30 @@ async def uploadZip(upload_file, users_id):
     }
     return True, res
 
+async def uploadHistory(users_id):
+    query = select(
+        upload.c.upload_id,
+        upload.c.filename,
+        upload.c.file_size,
+        upload.c.is_check,
+        upload.c.created_at
+    ).where(
+        upload.c.upload_by == users_id
+    )
 
+    try:
+        records = await database.CONNECTION.fetch_all(query)
+    except:
+        raise HTTPException(status_code=500, detail='SQL error')
+    if not records or len(records) == 0:
+        return False, 'Invalid users_id'
+    res = []
+    for record in records:
+        content = dict(record)
+        content['created_at'] = datetime.strftime(
+                content['created_at'] + timedelta(hours=constance.TIMEZONE),
+                "%Y-%m-%d %H:%M:%S"
+            )
+        res.append(content)
     
-    
+    return True, res

@@ -6,4 +6,6 @@ from source.controllers import (
 routes=[
     Route('/zip', endpoint=upload.uploadZip,
         methods=['POST'], name='uploadZip'),
+    Route('/history', endpoint=upload.uploadHistory,
+        methods=['GET'], name='uploadHistory'),
 ]
