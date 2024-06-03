@@ -11,6 +11,9 @@ def responseWithXML(media):
 def responseWithAudio(media):
     return Response(media, status_code = HTTP_200_OK, media_type="audio/basic")
 
+def responseWithBytes(bytes):
+    return Response(bytes, status_code = HTTP_200_OK, media_type="application/x-binary")
+
 def responseWithMedia(media, ETag, http_code = HTTP_200_OK):
     # headers = {"Cache-Control": "public, max-age=600", "Last-Modified": "Tue, 27 Sep 2022 14:25:00 GMT", "ETag": "gergWer2rqe2ryegRETWRQ"}
     headers = {"Cache-Control": "public, max-age=3600"}

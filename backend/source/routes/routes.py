@@ -3,7 +3,8 @@ from starlette.routing import Route, Mount, WebSocketRoute
 from . import (
     users,
     supplier,
-    apikey
+    apikey,
+    upload
 )
 
 async def homepage(request):
@@ -14,4 +15,5 @@ routes = [
     Mount('/api/users', routes=users.routes),
     Mount('/api/supplier', routes=supplier.routes),
     Mount('/api/apikey', routes=apikey.routes),
+    Mount('/api/upload', routes=upload.routes),
 ]
