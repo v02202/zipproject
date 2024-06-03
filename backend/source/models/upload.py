@@ -103,7 +103,7 @@ async def uploadZip(upload_file, users_id):
             "upload_id":upload_id,
             "file_type":"txt"
         }
-        for a in required_files
+        for a in zip_content if not a.startswith('__MACOSX')
     ]
     print("insert_list: ",insert_list)
     insert_stmt = files.insert().values(insert_list)
@@ -116,46 +116,6 @@ async def uploadZip(upload_file, users_id):
     }
     return True, res
 
-
-async def downloadZip(user_id, upload_id):
-    query = select(
-            upload.c.storage_path,
-            upload.c.filename
-    ).where(
-        and_(
-            upload.c.upload_id == upload_id,
-            upload.c.upload_by == user_id,
-        )
-    )
-    try:
-        upload_dict = await database.CONNECTION.fetch_one(query)
-    except:
-        raise HTTPException(status_code=500, detail='SQL error')
-    if not upload_dict:
-        return False, "wrong users_id or upload_id"
-    
-    print("upload_dict.storage_path: ", upload_dict.storage_path)
-    
-    # Decode file
-    encoded_zip_path = "temp.encoded.zip"
-    aws.s3_client.download_file(bucket, upload_dict.storage_path, encoded_zip_path)
-    
-    extract_to = './decoded_files'
-    decodeZip(encoded_zip_path, extract_to)
-    os.remove(encoded_zip_path)
-    # Return file contents (example for one file)
-    file_to_return = os.path.join(extract_to, "A.txt")
-    with open(file_to_return, "rb") as file:
-        content = file.read()
-
-    # Clean up extracted files
-    for root, dirs, files in os.walk(extract_to, topdown=False):
-        for name in files:
-            os.remove(os.path.join(root, name))
-        for name in dirs:
-            os.rmdir(os.path.join(root, name))
-    os.rmdir(extract_to)
-    return True, content
 
     
     

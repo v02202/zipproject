@@ -4,7 +4,8 @@ from . import (
     users,
     supplier,
     apikey,
-    upload
+    upload,
+    files
 )
 
 async def homepage(request):
@@ -16,4 +17,5 @@ routes = [
     Mount('/api/supplier', routes=supplier.routes),
     Mount('/api/apikey', routes=apikey.routes),
     Mount('/api/upload', routes=upload.routes),
+    Mount('/api/files', routes=files.routes),
 ]
