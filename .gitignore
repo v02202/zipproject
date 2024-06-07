@@ -4,3 +4,7 @@
 *.dump
 *.log
 __pycache__
+*.zip
+A.txt
+B.txt
+C.txt

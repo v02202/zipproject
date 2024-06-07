@@ -13,7 +13,7 @@ def generateToken(**kwargs):
     generate_token = jwt.encode(
         {'expired_time':formated_time, 'token':'access-token', **kwargs}, secret_key, algorithm="HS256")
     # generate refresh token
-    refresh_expired_time = datetime.now() + timedelta(hours=tz_offset) + timedelta(hours=36)
+    refresh_expired_time = datetime.now() + timedelta(hours=tz_offset) + timedelta(hours=24*10)
     refresh_formated_time = datetime.strftime(refresh_expired_time, "%Y-%m-%d %H:%M:%S")
     generate_refresh_token = jwt.encode(
         {'expired_time':refresh_formated_time, 'token':'refresh-token', **kwargs}, secret_key, algorithm="HS256")

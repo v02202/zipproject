@@ -51,7 +51,6 @@ class BasicAuth(BaseBasicAuth):
     async def authenticate(self, request):
         if "x-api-key" in request.headers:
             api_token = request.headers["x-api-key"]
-            content = jwt.decode(api_token, secret_key, algorithms=["HS256"])
             try:
                 content = jwt.decode(api_token, secret_key, algorithms=["HS256"])
                 print('content', content)

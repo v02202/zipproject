@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from starlette.config import Config
 from sqlalchemy.sql import text
+from starlette.exceptions import HTTPException
 from settings import database, constance
 from ..auth import auth
 from .allmodels import (
@@ -33,12 +34,12 @@ async def storeAPIkey(args):
         api_key = generated_key,
         api_name = args.api_name
     ).returning(apikey.c.api_key)
-    api_key = await database.CONNECTION.execute(query)
     try:
         api_key = await database.CONNECTION.execute(query)
-        return api_key
-    except :
-        return False
+    except:
+        raise HTTPException(status_code=500, detail='SQL error')
+    res = {"api_key": api_key}
+    return res
 
 async def getApiToken(args):
     exist_query = text(
@@ -47,7 +48,10 @@ async def getApiToken(args):
         x=args.api_name,
         y=args.api_key
     )
-    exist = await database.CONNECTION.execute(exist_query)
+    try:
+        exist = await database.CONNECTION.execute(exist_query)
+    except:
+        raise HTTPException(status_code=500, detail='SQL error')
     if exist == False:
         return 'invalid'
     else:

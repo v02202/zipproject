@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from sqlalchemy.sql import text
 from sqlalchemy import select, and_, func, exc
+from starlette.exceptions import HTTPException
 from settings import database
 from ..auth import auth
 from .allmodels import (
@@ -18,7 +19,7 @@ async def createSupplier(args):
     try:
         supplier_id = await database.CONNECTION.execute(query)
     except:
-        return False
+        raise HTTPException(status_code=500, detail='SQL error')
     
     res = {
         "supplier_id": supplier_id
@@ -28,5 +29,8 @@ async def createSupplier(args):
 
 async def getSupplier(id):
     query = select(supplier.c.supplier_name).where(supplier.c.supplier_id == id)
-    data = await database.CONNECTION.execute(query)
-    return data
+    try:
+        data = await database.CONNECTION.execute(query)
+    except:
+        raise HTTPException(status_code=500, detail='SQL error')
+    return {"supplier_name": data}

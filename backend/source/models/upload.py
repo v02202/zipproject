@@ -1,4 +1,4 @@
-from tempfile import NamedTemporaryFile
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 from datetime import datetime, timedelta
 import zipfile, os, base64
 from ..modules import aws, token

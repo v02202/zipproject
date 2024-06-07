@@ -25,8 +25,7 @@ async def storeAPIkey(request):
         error_message = 'existed_api_name'
         return error4062(error_message)
     else:
-        res = {"api_key": store}
-        return successWithData(res)   
+        return successWithData(store)   
 
 async def getApiToken(request):
     data = await request.json()

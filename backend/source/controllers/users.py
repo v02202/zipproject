@@ -5,7 +5,7 @@ from starlette.config import Config
 from starlette.exceptions import HTTPException
 from ..responses.responses import (
     success, successWithData,
-    error4221, error406, error4033,
+    error4221, error4032, error4033,
     error4001, error4063
 )
 from starlette.authentication import requires

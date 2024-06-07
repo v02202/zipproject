@@ -10,7 +10,7 @@ STATUS = {
     '4064' : 'HMAC bad verify',
     '4031' : 'Input files out of limit',
     '4032' : 'No permission',
-    '4033' : 'Token expires',
+    '4033' : 'Token error',
     '4011' : 'Unauthorized',
     '4000' : 'Third-party service error',
     '4221' : 'Unprocessable Entity',
