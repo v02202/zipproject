@@ -1,7 +1,7 @@
 ### Zip-project
 ## prerequirement
-    $  [docker](https://docs.docker.com/engine/install/) 
-    $  [docker-compose](https://docs.docker.com/compose/install/)
+    1. [docker](https://docs.docker.com/engine/install/) 
+    2. [docker-compose](https://docs.docker.com/compose/install/)
     
 ## After cloning the project, please follow the setup steps
     $ cp .template.env .env
