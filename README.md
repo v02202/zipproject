@@ -4,8 +4,8 @@
     2. [docker-compose](https://docs.docker.com/compose/install/)
     
 ## After cloning the project, please follow the setup steps
-    $ cp .template.env .env
     $ cd zipproject
+    $ cp .template.env ./backend/.env
     $ docker-compose build
     $ docker-compose up -d
 
